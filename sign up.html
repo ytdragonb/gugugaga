@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sign Up | Buat Akun</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f6f9fc 0%, #eef2f5 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        /* card utama */
+        .card {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(0px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* header dengan tombol back */
+        .header {
+            padding: 1.25rem 1.5rem 0.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .back-btn {
+            background: #f0f2f5;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .back-btn:hover {
+            background: #e4e7ec;
+            transform: scale(0.96);
+        }
+
+        .back-btn:active {
+            background: #d1d6dd;
+        }
+
+        .back-icon {
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 1;
+            color: #1e2a3e;
+        }
+
+        .header-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #4a5b6e;
+            letter-spacing: -0.2px;
+            background: #f0f4f8;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+        }
+
+        /* konten utama */
+        .content {
+            padding: 1.8rem 1.8rem 2.2rem;
+        }
+
+        .greeting h2 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: #0a2540;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        .greeting p {
+            color: #5c6f87;
+            font-size: 0.9rem;
+            margin-bottom: 1.8rem;
+            border-left: 3px solid #3b82f6;
+            padding-left: 0.7rem;
+        }
+
+        /* form grup */
+        .form-group {
+            margin-bottom: 1.35rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #2c3e50;
+            opacity: 0.8;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            font-size: 1rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 1.2rem;
+            background: #ffffff;
+            transition: all 0.2s;
+            font-family: inherit;
+            outline: none;
+            color: #0f172a;
+        }
+
+        input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        /* grup OTP (inline) */
+        .otp-wrapper {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .otp-wrapper input {
+            flex: 2;
+            min-width: 140px;
+        }
+
+        .btn-otp {
+            flex: 1;
+            background: #eef2ff;
+            border: none;
+            padding: 0.9rem 0.8rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 1.2rem;
+            color: #2563eb;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+
+        .btn-otp:hover {
+            background: #e0e7ff;
+            transform: translateY(-1px);
+        }
+
+        .btn-otp:active {
+            background: #cddcfe;
+            transform: translateY(1px);
+        }
+
+        .btn-otp:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* tombol utama sign up */
+        .btn-signup {
+            width: 100%;
+            background: #0f2b3d;
+            background: linear-gradient(95deg, #0f2b3d 0%, #1e3a5f 100%);
+            border: none;
+            padding: 0.95rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: white;
+            margin-top: 0.5rem;
+            margin-bottom: 1.2rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            letter-spacing: 0.3px;
+        }
+
+        .btn-signup:hover {
+            background: linear-gradient(95deg, #08212e 0%, #143250 100%);
+            transform: scale(0.99);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-signup:active {
+            transform: scale(0.97);
+        }
+
+        .signin-link {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #4b5565;
+        }
+
+        .signin-link a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 0.3rem;
+        }
+
+        .signin-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* pesan error/info */
+        .info-message {
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            padding-left: 0.5rem;
+            color: #e11d48;
+            min-height: 20px;
+        }
+
+        .success-message {
+            color: #10b981;
+        }
+
+        hr {
+            margin: 0.5rem 0 1rem;
+            border: none;
+            border-top: 1px solid #eef2f6;
+        }
+
+        /* alert custom */
+        .toast-msg {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: 1000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: opacity 0.2s;
+            pointer-events: none;
+            white-space: nowrap;
+            backdrop-filter: blur(4px);
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                padding: 1.5rem;
+            }
+            .otp-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn-otp {
+                width: 100%;
+            }
+            .toast-msg {
+                white-space: normal;
+                text-align: center;
+                max-width: 85vw;
+                border-radius: 40px;
+                padding: 8px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <!-- header: tombol back + label -->
+    <div class="header">
+        <button class="back-btn" id="backButton" aria-label="Kembali ke halaman sebelumnya">
+            <span class="back-icon">←</span>
+        </button>
+        <span class="header-title">Daftar Akun</span>
+    </div>
+
+    <div class="content">
+        <div class="greeting">
+            <h2>Create Your Account</h2>
+            <p>Mulai jelajahi layanan kami</p>
+        </div>
+
+        <!-- FORM SIGN UP -->
+        <form id="signupForm" action="#" method="post">
+            <!-- username -->
+            <div class="form-group">
+                <label>USERNAME</label>
+                <input type="text" id="username" placeholder="cth: johndoe123" autocomplete="username" required>
+                <div class="info-message" id="usernameError"></div>
+            </div>
+
+            <!-- email atau no telp -->
+            <div class="form-group">
+                <label>EMAIL ATAU NO TELEPON</label>
+                <input type="text" id="contact" placeholder="email@contoh.com atau 08123456789" autocomplete="email" required>
+                <div class="info-message" id="contactError"></div>
+            </div>
+
+            <!-- password -->
+            <div class="form-group">
+                <label>PASSWORD</label>
+                <input type="password" id="password" placeholder="minimal 6 karakter" autocomplete="new-password" required>
+                <div class="info-message" id="passwordError"></div>
+            </div>
+
+            <!-- kode OTP + kirim kode OTP -->
+            <div class="form-group">
+                <label>KODE OTP</label>
+                <div class="otp-wrapper">
+                    <input type="text" id="otpCode" placeholder="6 digit kode" autocomplete="off" maxlength="6">
+                    <button type="button" class="btn-otp" id="sendOtpBtn">Kirim Kode OTP</button>
+                </div>
+                <div class="info-message" id="otpInfoMsg"></div>
+            </div>
+
+            <!-- tombol Sign Up -->
+            <button type="submit" class="btn-signup" id="signupBtn">Sign Up</button>
+            
+            <div class="signin-link">
+                Already have an account? <a href="#" id="signinLink">Sign in</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // ========================
+    // SIMULASI OTP (mock)
+    // ========================
+    // Untuk keperluan demo, OTP akan disimpan sementara di memori
+    // setelah klik "Kirim Kode OTP", sistem akan generate OTP 6 digit acak
+    // dan menampilkan alert / info bahwa OTP telah dikirim (demo).
+    // validasi signup: pastikan OTP yang dimasukkan cocok dengan OTP terakhir yang dikirim
+    let lastGeneratedOtp = null;
+    let otpSentTimestamp = null;
+    let otpExpired = false;
+
+    // elemen
+    const usernameInput = document.getElementById('username');
+    const contactInput = document.getElementById('contact');
+    const passwordInput = document.getElementById('password');
+    const otpInput = document.getElementById('otpCode');
+    const sendOtpBtn = document.getElementById('sendOtpBtn');
+    const signupForm = document.getElementById('signupForm');
+    const backButton = document.getElementById('backButton');
+    const signinLink = document.getElementById('signinLink');
+
+    // elemen error message
+    const usernameError = document.getElementById('usernameError');
+    const contactError = document.getElementById('contactError');
+    const passwordError = document.getElementById('passwordError');
+    const otpInfoMsg = document.getElementById('otpInfoMsg');
+
+    // helper show toast
+    function showToast(message, isError = false) {
+        // hapus toast jika sudah ada sebelumnya
+        const existingToast = document.querySelector('.toast-msg');
+        if(existingToast) existingToast.remove();
+
+        const toast = document.createElement('div');
+        toast.className = 'toast-msg';
+        toast.textContent = message;
+        if(isError) {
+            toast.style.backgroundColor = '#b91c1c';
+            toast.style.color = '#fff5f5';
+        } else {
+            toast.style.backgroundColor = '#0f3b2c';
+            toast.style.color = '#ecfdf5';
+        }
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            if(toast && toast.remove) toast.remove();
+        }, 2800);
+    }
+
+    // validasi realtime sederhana
+    function validateUsername() {
+        const val = usernameInput.value.trim();
+        if(val === "") {
+            usernameError.innerText = "Username tidak boleh kosong";
+            return false;
+        } else if(val.length < 3) {
+            usernameError.innerText = "Username minimal 3 karakter";
+            return false;
+        } else {
+            usernameError.innerText = "";
+            return true;
+        }
+    }
+
+    function validateContact() {
+        const val = contactInput.value.trim();
+        if(val === "") {
+            contactError.innerText = "Email atau nomor telepon wajib diisi";
+            return false;
+        }
+        // pengecekan sederhana: email mengandung @ dan . atau nomor telepon digit minimal 9
+        const isEmail = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/i.test(val);
+        const isPhone = /^[\d\s\+\(\)]{9,}$/.test(val.replace(/\s/g, '')) && /\d{9,}/.test(val.replace(/\D/g, ''));
+        if(!isEmail && !isPhone) {
+            contactError.innerText = "Masukkan email valid (user@domain.com) atau nomor telepon (min 9 digit)";
+            return false;
+        }
+        contactError.innerText = "";
+        return true;
+    }
+
+    function validatePassword() {
+        const pass = passwordInput.value;
+        if(pass === "") {
+            passwordError.innerText = "Password harus diisi";
+            return false;
+        } else if(pass.length < 6) {
+            passwordError.innerText = "Password minimal 6 karakter";
+            return false;
+        } else {
+            passwordError.innerText = "";
+            return true;
+        }
+    }
+
+    // fungsi untuk generate OTP acak 6 digit
+    function generateAndSendOtp() {
+        // validasi kontak (email/nomor) diperlukan sebelum kirim OTP? lebih baik memberi tahu user
+        const contactValid = validateContact();
+        if(!contactValid) {
+            showToast("Isi email / nomor telepon dengan benar terlebih dahulu", true);
+            contactInput.focus();
+            return false;
+        }
+        // generate OTP 6 digit
+        const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
+        lastGeneratedOtp = otpCode;
+        otpSentTimestamp = Date.now();
+        otpExpired = false;
+        
+        // Simulasi "Kirim OTP" (demo) - biasanya via SMS/email, disini kita tampilkan di console & toast
+        console.log(`[DEMO OTP] Kode OTP untuk ${contactInput.value.trim()} adalah ${otpCode}`);
+        showToast(`✅ Kode OTP dikirim ke ${contactInput.value.trim().substring(0,30)} (demo: ${otpCode})`, false);
+        otpInfoMsg.innerHTML = `<span style="color:#2563eb;">✔️ Kode OTP terkirim! Cek console atau toast. Berlaku 5 menit.</span>`;
+        // atur timer 5 menit kadaluarsa
+        setTimeout(() => {
+            if(lastGeneratedOtp === otpCode && !otpExpired) {
+                otpExpired = true;
+                otpInfoMsg.innerHTML = `<span style="color:#e11d48;">⚠️ Kode OTP telah kedaluwarsa, silakan kirim ulang.</span>`;
+                lastGeneratedOtp = null;
+            }
+        }, 300000); // 5 menit
+
+        // kosongkan pesan sebelumnya
+        setTimeout(() => {
+            if(otpInfoMsg.innerHTML.includes("terkirim") && !otpExpired && lastGeneratedOtp === otpCode) {
+                // tetap info, hanya biarkan sampai user input
+            }
+        }, 4000);
+        return true;
+    }
+
+    // event kirim OTP
+    sendOtpBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        generateAndSendOtp();
+    });
+
+    // validasi OTP saat signup
+    function validateOtp() {
+        const enteredOtp = otpInput.value.trim();
+        if(enteredOtp === "") {
+            otpInfoMsg.innerHTML = "<span style='color:#e11d48'>Kode OTP harus diisi</span>";
+            return false;
+        }
+        if(lastGeneratedOtp === null) {
+            otpInfoMsg.innerHTML = "<span style='color:#e11d48'>Silakan kirim kode OTP terlebih dahulu</span>";
+            return false;
+        }
+        if(otpExpired) {
+            otpInfoMsg.innerHTML = "<span style='color:#e11d48'>OTP sudah expired. Kirim ulang kode.</span>";
+            return false;
+        }
+        if(enteredOtp !== lastGeneratedOtp) {
+            otpInfoMsg.innerHTML = "<span style='color:#e11d48'>Kode OTP salah, coba lagi</span>";
+            return false;
+        }
+        otpInfoMsg.innerHTML = "<span style='color:#10b981'>✓ Kode OTP valid</span>";
+        return true;
+    }
+
+    // reset error OTP info jika input berubah
+    otpInput.addEventListener('input', () => {
+        if(otpInfoMsg.innerHTML.includes("salah") || otpInfoMsg.innerHTML.includes("harus diisi") || otpInfoMsg.innerHTML.includes("valid") || otpInfoMsg.innerHTML.includes("terlebih")) {
+            // hapus pesan error sementara jika user mulai mengetik
+            if(otpInput.value.trim() !== "" && lastGeneratedOtp !== null && !otpExpired) {
+                otpInfoMsg.innerHTML = "<span style='color:#6c757d;'>🔑 Masukkan kode 6 digit</span>";
+            } else if (lastGeneratedOtp === null){
+                otpInfoMsg.innerHTML = "";
+            } else {
+                otpInfoMsg.innerHTML = "";
+            }
+        }
+    });
+
+    // event input realtime validasi
+    usernameInput.addEventListener('input', validateUsername);
+    contactInput.addEventListener('input', validateContact);
+    passwordInput.addEventListener('input', validatePassword);
+
+    // handle submit signup
+    signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const isUsernameOk = validateUsername();
+        const isContactOk = validateContact();
+        const isPasswordOk = validatePassword();
+        const isOtpOk = validateOtp();
+
+        if(isUsernameOk && isContactOk && isPasswordOk && isOtpOk) {
+            // semua valid, sukses daftar
+            const userData = {
+                username: usernameInput.value.trim(),
+                contact: contactInput.value.trim(),
+                // note: jangan simpan password mentah di demo, tapi disini hanya simulasi
+                registeredAt: new Date().toISOString()
+            };
+            console.log("Sign Up berhasil:", userData);
+            showToast(`🎉 Selamat! Akun ${userData.username} berhasil dibuat. (demo)`, false);
+            // Reset form setelah sukses? opsional, tapi biarkan user lihat sukses
+            // reset OTP state supaya form tidak langsung error
+            lastGeneratedOtp = null;
+            otpExpired = false;
+            // optional reset OTP field dan info
+            otpInput.value = "";
+            otpInfoMsg.innerHTML = "<span style='color:#10b981'>✅ Pendaftaran berhasil, silakan login.</span>";
+            // reset password field untuk keamanan (opsional)
+            // passwordInput.value = "";
+            // bisa juga redirect secara halus (simulasi)
+            setTimeout(() => {
+                showToast("Redirect ke halaman Sign in (demo)", false);
+                // di demo tidak pindah halaman, hanya simulasi
+            }, 1200);
+        } else {
+            // jika ada error fokus pada field pertama yang salah
+            if(!isUsernameOk) usernameInput.focus();
+            else if(!isContactOk) contactInput.focus();
+            else if(!isPasswordOk) passwordInput.focus();
+            else if(!isOtpOk) otpInput.focus();
+            showToast("Periksa kembali data anda", true);
+        }
+    });
+
+    // TOMBOL BACK: kembali ke halaman sebelumnya (history back)
+    backButton.addEventListener('click', () => {
+        // sesuai deskripsi: tombol back untuk ke halaman sebelumnya
+        if(window.history.length > 1) {
+            window.history.back();
+        } else {
+            // jika tidak ada history, bisa beri notifikasi atau fallback
+            showToast("Tidak ada halaman sebelumnya (demo)", false);
+            // opsional: buat simulasi kembali ke beranda
+            console.log("Tombol back ditekan, tidak ada history");
+        }
+    });
+
+    // Sign in link
+    signinLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showToast("🔐 Arahkan ke halaman Sign in (simulasi link)", false);
+        // bisa juga menampilkan alert atau ganti konten
+        console.log("Redirect ke sign-in page");
+        // Anda bisa mengarahkan ke file sign-in.html jika tersedia, disini hanya simulasi
+    });
+
+    // inisialisasi: atur info OTP awal
+    otpInfoMsg.innerHTML = "";
+    // jika field OTP kosong, tampilkan petunjuk ringan?
+    // tambahkan validasi pada input OTP agar hanya angka
+    otpInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/g, '').slice(0,6);
+    });
+    
+    // demo: jika user sudah pernah generate sebelumnya tidak masalah
+    // set placeholder lain
+    usernameInput.placeholder = "username unik";
+    contactInput.placeholder = "contoh: nama@email.com atau 08123456789";
+    
+    // pembersihan pesan error saat fokus
+    const allInputs = [usernameInput, contactInput, passwordInput];
+    allInputs.forEach(inp => {
+        inp.addEventListener('focus', () => {
+            if(inp.id === 'username') usernameError.innerText = "";
+            if(inp.id === 'contact') contactError.innerText = "";
+            if(inp.id === 'password') passwordError.innerText = "";
+        });
+    });
+</script>
+</body>
+</html>

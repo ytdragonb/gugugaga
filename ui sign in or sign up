@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilih Sign In atau Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f0f5fe 0%, #e9eef5 100%);
+            font-family: system-ui, 'Segoe UI', 'Inter', 'Poppins', 'Helvetica Neue', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+
+        /* Kartu utama */
+        .choice-container {
+            max-width: 520px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 2.5rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .choice-container:hover {
+            transform: scale(1.01);
+        }
+
+        /* area konten dalam */
+        .choice-card {
+            padding: 2rem 2rem 2.5rem;
+        }
+
+        /* header logo + judul - semua tersusun VERTIKAL (ke bawah) */
+        .logo-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, #1e2b6e, #2a3f8c);
+            width: 80px;
+            height: 80px;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 18px -8px rgba(0, 20, 50, 0.25);
+            margin-bottom: 1.25rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(125deg, #111827, #2c3e6d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.75rem;
+        }
+
+        /* pesan ajakan - diletakkan PERSIS DI BAWAH welcome */
+        .invite-message {
+            text-align: center;
+            background: #f8fafc;
+            padding: 0.75rem 1rem;
+            border-radius: 1.5rem;
+            margin: 0 0 1.8rem 0;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .invite-message p {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        /* dua tombol */
+        .actions-dual {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            background: white;
+            color: #1e293b;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .btn-primary {
+            background: #0f2b5c;
+            color: white;
+            box-shadow: 0 8px 18px -6px rgba(15, 43, 92, 0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-primary:hover {
+            background: #1a3a74;
+            transform: translateY(-3px);
+            box-shadow: 0 14px 24px -10px rgba(15, 43, 92, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            border: 1.5px solid #cbd5e1;
+            color: #1e293b;
+        }
+
+        .btn-secondary:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px -12px rgba(0,0,0,0.15);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* responsif untuk hp */
+        @media (max-width: 480px) {
+            .choice-card {
+                padding: 1.5rem;
+            }
+            .welcome-title {
+                font-size: 1.7rem;
+            }
+            .logo-icon {
+                width: 70px;
+                height: 70px;
+            }
+            .btn {
+                padding: 0.85rem 1rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* aksesibilitas fokus */
+        .btn:focus-visible {
+            outline: 3px solid #2563eb;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="choice-container">
+    <div class="choice-card">
+        
+        <!-- Logo Aplikasi -->
+        <div class="logo-area">
+            <div class="logo-icon">
+                SPLASH
+            </div>
+            <h1 class="welcome-title">Welcome</h1>
+        </div>
+
+        <!-- Pesan "pls sign in atau sign up" LANGSUNG DI BAWAH WELCOME -->
+        <div class="invite-message">
+            <p>✨ pls sign in atau sign up ✨</p>
+        </div>
+
+        <!-- Dua tombol: Sign In dan Sign Up -->
+        <div class="actions-dual">
+            <button class="btn btn-primary" id="btnSignIn">
+                 sign in
+            </button>
+            
+            <button class="btn btn-secondary" id="btnSignUp">
+                 sign up
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Fungsi untuk navigasi ke halaman sign in
+    document.getElementById('btnSignIn').addEventListener('click', function() {
+        window.location.href = 'sign-in.html'; // ganti dengan URL halaman sign in sebenarnya
+    });
+
+    // Fungsi untuk navigasi ke halaman sign up
+    document.getElementById('btnSignUp').addEventListener('click', function() {
+        window.location.href = 'sign-up.html'; // ganti dengan URL halaman sign up sebenarnya
+    });
+</script>
+
+</body>
+</html>>
